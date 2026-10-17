@@ -4,7 +4,8 @@ An interactive machine-learning application for identifying potentially fraudule
 
 ## 📊 Dashboard Preview
 
-![FraudShield Dashboard](images/dashboard.png)
+![Uploading image.png…]()
+
 
 ## 🚀 Live Demo
 
