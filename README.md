@@ -4,7 +4,8 @@ An interactive machine-learning application for identifying potentially fraudule
 
 ## 📊 Dashboard Preview
 
-![Uploading image.png…]()
+<img width="1920" height="1080" alt="Screenshot (396)" src="https://github.com/user-attachments/assets/2b4354cb-5187-48de-9d28-798021866dea" />
+
 
 
 ## 🚀 Live Demo
