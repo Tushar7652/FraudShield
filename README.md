@@ -2,6 +2,10 @@
 
 An interactive machine-learning application for identifying potentially fraudulent transactions, reviewing suspicious activity, and maintaining investigation records.
 
+## 📊 Dashboard Preview
+
+![FraudShield Dashboard](images/dashboard.png)
+
 ## 🚀 Live Demo
 
 **Try FraudShield online:** [Launch FraudShield](https://fraudshield-tfhpmfhblhtzoxlvgmum9a.streamlit.app/)
