@@ -2,6 +2,12 @@
 
 An interactive machine-learning application for identifying potentially fraudulent transactions, reviewing suspicious activity, and maintaining investigation records.
 
+## 🚀 Live Demo
+
+**Try FraudShield online:** [Launch FraudShield](https://fraudshield-tfhpmfhblhtzoxlvgmum9a.streamlit.app/)
+
+Explore the interactive fraud detection dashboard, analyze sample transactions, view fraud probability charts, and review transaction history.
+
 ## Overview
 
 FraudShield uses an XGBoost classification model to estimate transaction fraud risk. The Streamlit dashboard lets users explore predictions, review risk indicators, visualize results, and maintain investigation notes.
