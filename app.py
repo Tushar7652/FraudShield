@@ -392,23 +392,37 @@ def predict_transaction(values):
 
 # ---------------- TRANSACTION TESTING ----------------
 
+
 csv_default = Path(__file__).parent / "fraudshield_sample.csv"
 
 if method == "Sample Transactions":
 
     st.info(
-        "Test actual rows from your transaction dataset."
+        "Test actual rows from your transaction dataset. "
+        "Upload or select a CSV file available to this app."
     )
 
     csv_path = st.text_input(
         "Dataset CSV path",
-        value=str(csv_default),
+        value=str(csv_default) if csv_default.exists() else "",
         key="sample_csv_path"
+    )
+
+    uploaded_csv = st.file_uploader(
+        "Or upload your transaction dataset (CSV)",
+        type=["csv"],
+        key="sample_csv_upload"
     )
 
     if st.button("Load sample transactions"):
         try:
-            data = pd.read_csv(csv_path)
+            if uploaded_csv is not None:
+                data = pd.read_csv(uploaded_csv)
+            elif csv_path.strip():
+                data = pd.read_csv(csv_path.strip())
+            else:
+                st.error("Please upload a CSV file or enter a valid CSV path.")
+                st.stop()
 
             if "Hour" not in data.columns and "Time" in data.columns:
                 data["Hour"] = (
@@ -424,12 +438,10 @@ if method == "Sample Transactions":
                 )
             else:
                 st.session_state["sample_data"] = data
-                st.success(
-                    f"Loaded {len(data)} transactions."
-                )
+                st.success(f"Loaded {len(data)} transactions.")
 
-        except Exception as exc:
-            st.error(f"Could not load CSV: {exc}")
+        except Exception as e:
+            st.error(f"Could not load CSV: {e}")
 
     if "sample_data" in st.session_state:
         data = st.session_state["sample_data"]
@@ -984,7 +996,7 @@ if history:
         st.markdown("### Investigate Flagged Transactions")
 
         for idx, transaction in suspicious_df.iterrows():
-         transaction_id = str(idx)
+            transaction_id = str(idx)
 
         with st.expander(f"Review Transaction: {transaction_id}"):
             probability = pd.to_numeric(
@@ -1022,10 +1034,10 @@ if history:
 
         def save_current_review():
             save_investigation_review(
-            transaction_id,
-            st.session_state[status_key],
-            st.session_state[notes_key]
-        )
+                transaction_id,
+                st.session_state[status_key],
+                st.session_state[notes_key]
+            )
 
         st.selectbox(
             "Investigation Status",
@@ -1047,18 +1059,18 @@ if history:
         )
 
         suspicious_csv = suspicious_df.to_csv(
-        index=False
+            index=False
         ).encode("utf-8")
 
         st.download_button(
-        label="Download Flagged Transactions CSV",
-        data=suspicious_csv,
-        file_name="fraudshield_flagged_transactions.csv",
-        mime="text/csv",
-        key="download_flagged_transactions"
-    )
+            label="Download Flagged Transactions CSV",
+            data=suspicious_csv,
+            file_name="fraudshield_flagged_transactions.csv",
+            mime="text/csv",
+            key="download_flagged_transactions"
+        )
     else:
-     st.success("No transactions are currently flagged by the model.")
+        st.success("No transactions are currently flagged by the model.")
 
 
 if st.button("Clear testing history"):
