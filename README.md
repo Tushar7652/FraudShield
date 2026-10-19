@@ -1,6 +1,6 @@
-# FraudShield — Fraud Detection Dashboard
+# FraudShield
 
-An interactive machine-learning application for identifying potentially fraudulent transactions, reviewing suspicious activity, and maintaining investigation records.
+An interactive fraud-detection dashboard built with Streamlit, XGBoost, Pandas, Plotly, and SQLite.
 
 ## 📊 Dashboard Preview
 
@@ -15,20 +15,23 @@ An interactive machine-learning application for identifying potentially fraudule
 Explore the interactive fraud detection dashboard, analyze sample transactions, view fraud probability charts, and review transaction history.
 
 ## Overview
+## Run locally
 
-FraudShield uses an XGBoost classification model to estimate transaction fraud risk. The Streamlit dashboard lets users explore predictions, review risk indicators, visualize results, and maintain investigation notes.
+1. Create/activate your virtual environment.
+2. Install dependencies: `pip install -r requirements.txt`
+3. Keep `fraudshield_xgb_model.json` beside `app.py`.
+4. Run: `streamlit run app.py`
 
-## Features
+Optional: place `fraudshield_sample.csv` beside `app.py`, or upload a compatible CSV through the dashboard.
 
-- **Fraud prediction:** Classifies transactions using a trained XGBoost model.
-- **Transaction analysis:** Supports sample transactions and manual entry.
-- **Risk visualization:** Displays prediction distributions, fraud-versus-legitimate summaries, and fraud probability trends.
-- **Persistent history:** Stores transaction history in SQLite.
-- **Investigation workflow:** Records review statuses and analyst notes.
-- **CSV exports:** Exports transaction history and flagged transactions.
-- **History management:** Provides a way to clear saved transaction history.
+## Project layout
 
-## Technology Stack
+- `app.py` — Streamlit page and transaction input flow
+- `config.py` — paths, feature list, threshold, and styling
+- `services/prediction.py` — model loading and prediction
+- `database/history.py` — SQLite history and investigation review persistence
+- `components/charts.py` — analytics charts and KPI metrics
+- `components/history_panel.py` — transaction history, exports, investigation UI
 
 - Python
 - Streamlit
@@ -131,3 +134,4 @@ This project was developed using a credit-card fraud detection dataset with the 
 - **Redistribution:** The dataset CSV is not included in this repository. The trained model is distributed only subject to the applicable licence terms and conditions.
 
 Users should review the dataset's current licence and applicable Open Data Commons terms before redistributing the dataset, trained model, or derivatives.
+The local SQLite database is created automatically. Do not commit personal or sensitive transaction data.
